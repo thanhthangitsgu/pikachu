@@ -21,47 +21,81 @@ export class GameView extends Component {
     })
     private prefabCharacter: Prefab;
 
-    private row: number = 10;
+    private row: number = 6;
 
-    private column: number = 6;
+    private column: number = 10;
 
     private listNumber: number[] = [];
 
     private listCharacterNode: Node[] = [];
 
+    private dataMatrix: Array<Array<number>> = [];
+
+    protected start(): void {
+        this.genData();
+    }
+
     private genData(): void {
         const data = config;
 
-        //Set số lượng character
-        this.listCharacterNode.length = this.row * this.column;
-
-        //Random số lượng character (Cái này em set cứng trước cũng được)
+        //Lấy số lượng character từ config
         for (let i = 0; i < config.length; i++) {
-            let number = math.randomRangeInt(config[i][0], config[i][1]);
-            this.listNumber.push(number);
-        }
+            this.listNumber.push(config[i]);
+        };
 
-        //Tính tổng và lấy số lượng character cuối cùng
-        let sum = this.listNumber.reduce((total, item) => total + item, 0);
-        this.listNumber.push(this.row * this.column - sum);
-
-        //Mảng lưu vị trí để random
-        let listLocation = [];
-        for (let i = 0; i < this.row * this.column; i++) listLocation.push(i);
-
-        for (let i = 0; i < config.length; i++) {
+        //Tạo mảng character    
+        for (let i = 0; i < this.listNumber.length; i++) {
             let total = this.listNumber[i];
 
             for (let j = 0; j < total; j++) {
-                let indexRandom = math.randomRangeInt(0, listLocation.length);
-                listLocation.splice(indexRandom, 1);
-
                 let character = instantiate(this.prefabCharacter);
-                character.getComponent(Character).setSprite(this.listSpriteCharacter[indexRandom]);
-                character.getComponent(Character).setType(indexRandom);
 
+                character.getComponent(Character).setSprite(this.listSpriteCharacter[i]);
+                character.getComponent(Character).setType(i);
+
+                this.listCharacterNode.push(character);
             }
         }
+
+        console.log(this.listCharacterNode);
+
+        //Random lại vị trí node
+        // this.shuffleListNode();
+
+        //Cập nhật ma trận
+         this.updateMatrix();
+
+        //Spaw UI
+        this.listCharacterNode.map((item) => {
+            this.matchContain.addChild(item)
+        });
+    }
+
+    /**
+     * Random lại vị trí của các phần tử trong mảng => Ma trận tạo ra cũng sẽ được random
+     */
+    private shuffleListNode() {
+
+        for (let i = this.listCharacterNode.length - this.column - 1; i > this.row; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+
+            [this.listCharacterNode[i], this.listCharacterNode[j]] = [this.listCharacterNode[j], this.listCharacterNode[i]];
+        }
+    }
+
+    private updateMatrix(): void {
+        //Xây dựng ma trận từ danh sách character
+        this.dataMatrix = [];
+        for (let i = 0; i <= this.row + 1; i++) {
+            let array = new Array(this.column + 2);
+            array.fill(-1, 0, this.column + 2);
+            this.dataMatrix.push(array);
+        }
+
+        for (let i = 0; i < this.row + 2; i++)
+            for (let j = 0; j < this.column + 2; j++) this.dataMatrix[i][j] = this.listCharacterNode[i * (this.column + 2) + j].getComponent(Character).getType();
+
+        
     }
 }
 

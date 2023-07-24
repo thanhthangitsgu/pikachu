@@ -165,10 +165,7 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": {
-      "__uuid__": "e97f8c77-8024-4067-8c96-379a8d25464b@f9941",
-      "__expectedType__": "cc.SpriteFrame"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_fillType": 0,
     "_sizeMode": 0,
@@ -209,7 +206,7 @@
       "__id__": 1
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 9
@@ -284,7 +281,7 @@
     "node": {
       "__id__": 8
     },
-    "_enabled": false,
+    "_enabled": true,
     "__prefab": {
       "__id__": 12
     },
@@ -296,7 +293,7 @@
       "r": 0,
       "g": 0,
       "b": 0,
-      "a": 96
+      "a": 94
     },
     "_spriteFrame": {
       "__uuid__": "fa7de3fd-e15d-49eb-833f-e55e9cd1b0c3@f9941",

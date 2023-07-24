@@ -32,18 +32,4 @@ export const Data = [
  * Lưu cấu hình ma trận: Số lượng tối thiểu và tối đa của một character chia 2. 
  * (Để xíu mình đảm bảo random ra số lượng character sẽ chẵn)
  */
-export const config = [
-  [3, 4], //=>> Tối thiểu 6, tối đa 8.
-  [3, 4],
-  [3, 4], 
-  [3, 4], 
-  [3, 4],
-  [3, 4],
-  [3, 4],
-  [3, 4],
-  [3, 4],
-  [3, 4],
-  [3, 4],
-  [3, 4],
-  //Character cuối cùng không cần random vì mình lấy tổng trừ :))
-]
+export const config = [4, 4, 4, 4, 4, 6, 4, 6, 4, 6, 4, 6, 4];

@@ -27,7 +27,7 @@ export class Character extends Component {
     private listPath: Map<Node, Array<Node>> = new Map();
 
     //Loại character
-    private type: number = 0;
+    private type: number = -1;
 
     protected onLoad(): void {
 
@@ -52,6 +52,10 @@ export class Character extends Component {
 
     public setType(type: number): void {
         this.type = type;
+    }
+
+    public getType(): number {
+        return this.type
     }
 }
 

@@ -439,9 +439,9 @@
     "_spacingY": 0.5,
     "_verticalDirection": 1,
     "_horizontalDirection": 0,
-    "_constraint": 0,
-    "_constraintNum": 2,
-    "_affectedByScale": false,
+    "_constraint": 2,
+    "_constraintNum": 10,
+    "_affectedByScale": true,
     "_isAlign": false,
     "_id": "1c8tV/HLRJc6G20YOLsG7e"
   },
