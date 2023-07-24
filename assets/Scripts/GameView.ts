@@ -29,6 +29,8 @@ export class GameView extends Component {
 
     private listCharacterNode: Node[] = [];
 
+    private listAllNode: Node[] = [];
+
     private dataMatrix: Array<Array<number>> = [];
 
     protected start(): void {
@@ -57,13 +59,19 @@ export class GameView extends Component {
             }
         }
 
-        console.log(this.listCharacterNode);
+        this.listAllNode = [];
+        for (let i = -1; i <= this.row; i++) {
+            for (let j = -1; j <= this.column; j++) {
+                if (i < 0 || j < 0 || i == this.row || j == this.column) this.listAllNode.push(instantiate(this.prefabCharacter));
+                else this.listAllNode.push(this.listCharacterNode[i * this.row + j]);
+            }
+        }
 
         //Random lại vị trí node
         // this.shuffleListNode();
 
         //Cập nhật ma trận
-         this.updateMatrix();
+        this.updateMatrix();
 
         //Spaw UI
         this.listCharacterNode.map((item) => {
@@ -93,9 +101,9 @@ export class GameView extends Component {
         }
 
         for (let i = 0; i < this.row + 2; i++)
-            for (let j = 0; j < this.column + 2; j++) this.dataMatrix[i][j] = this.listCharacterNode[i * (this.column + 2) + j].getComponent(Character).getType();
+            for (let j = 0; j < this.column + 2; j++) this.dataMatrix[i][j] = this.listAllNode[i * (this.column + 2) + j].getComponent(Character).getType();
 
-        
+        console.log(this.dataMatrix);
     }
 }
 
